@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Account {
+public class Account implements Comparable {
     private String name;
     private double balance;
     Account() {}
@@ -30,6 +30,7 @@ public class Account {
     public Account[] populateAccounts() {
         Scanner sc = new Scanner(System.in);
         Account[] accounts = new Account[3];
+        System.out.println("Account Regestery (3 accounts per session)");
         System.out.println("1. Enter name & click 'Enter'");
         System.out.println("2. Enter balance & click 'Enter'");
         for (int i = 0; i < accounts.length; i++) {
@@ -50,5 +51,45 @@ public class Account {
             sum += accounts[i].getBalance();
         }
         return sum;
+    }
+    @Override
+    public int compareTo(Object o) {
+        return (((Account) o).getName()).compareTo(this.getName());
+    }
+    public void sortAccounts(Account[] accounts) {
+        for (int i = 0; i < accounts.length; i++) {
+            for (int j = 0; j < accounts.length; j++) {
+                int compared = accounts[i].getName().compareTo(accounts[j].getName());
+                if (compared < 0) {
+                    Account account = accounts[i];
+                    accounts[i] = accounts[j];
+                    accounts[j] = account;
+                }
+            }
+        }
+    }
+    public String accountSearch(Account[] accounts) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter name to view account: ");
+        String name = sc.next();
+        int lo = 0, hi = accounts.length-1;
+        while (lo <= hi) {
+            int mid = lo + (hi - lo) / 2;
+            for (int i = 0; i < accounts.length; i++) {
+                int compared = name.compareTo(accounts[i].getName());
+                if (compared == 0) {
+                    return accounts[i].getAccount().toString();
+                }
+                else {
+                    if (compared > 0) {
+                        lo = mid + 1;
+                    }
+                    else {
+                        hi = mid - 1;
+                    }
+                }
+            }
+        }
+        return new String("No such name");
     }
 }
