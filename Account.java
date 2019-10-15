@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Account implements Comparable {
     private String name;
     private double balance;
+    private static int numberOfAccounts = 0;
     Account() {}
     Account(String name, double balance) {
         this.name = name;
@@ -37,6 +38,7 @@ public class Account implements Comparable {
             String name = sc.next();
             double balance = sc.nextDouble();
             accounts[i] = new Account(name, balance);
+            numberOfAccounts++;
         }
         return accounts;
     }
@@ -51,6 +53,9 @@ public class Account implements Comparable {
             sum += accounts[i].getBalance();
         }
         return sum;
+    }
+    public static int numberOfAccounts() {
+        return numberOfAccounts;
     }
     @Override
     public int compareTo(Object o) {

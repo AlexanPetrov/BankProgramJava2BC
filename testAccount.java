@@ -13,7 +13,9 @@ public class testAccount {
         account.displayAccounts(accounts);
         System.out.println();
 
-        System.out.println("Total Accounts' Balance: " + account.totalAccountsBalance(accounts));
+        System.out.println("Total Number of Accounts: " + Account.numberOfAccounts());
+
+        System.out.println("Total Accounts' Balance: " + Account.totalAccountsBalance(accounts));
 
         System.out.println(account.accountSearch(accounts));
     }
